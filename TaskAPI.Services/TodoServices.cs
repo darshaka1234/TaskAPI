@@ -2,7 +2,7 @@
 
 namespace TaskAPI.Services
 {
-    public class TodoServices
+    public class TodoServices : ItodoRepository
     {
         public List<Todo> AllTodos()
         {
