@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskAPI.Models;
+using TaskAPI.Services;
 
 namespace TaskAPI.Controllers
 {
@@ -8,40 +9,21 @@ namespace TaskAPI.Controllers
     [ApiController]
     public class TodosController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult GetTodos()
+        private TodoServices _todoServices;
+
+        public TodosController()
         {
-            var todos = AllTodos();
-            return Ok(todos);
+            _todoServices = new TodoServices();
         }
-        private static List<Todo> AllTodos()
+        [HttpGet("{id?}")]
+        public IActionResult GetTodos(int? id)
         {
-            var todos = new List<Todo>();
-
-            var todo1 = new Todo
-            {
-                Id = 1,
-                Title = "todo1",
-                Description = "just todo 1",
-                Created = DateTime.Now,
-                Due = DateTime.Now.Date.AddDays(1),
-                Status = TodoStatus.New
-            };
-            todos.Add(todo1);
-
-            var todo2 = new Todo
-            {
-                Id = 2,
-                Title = "todo2",
-                Description = "just todo 2",
-                Created = DateTime.Now,
-                Due = DateTime.Now.Date.AddDays(2),
-                Status = TodoStatus.New
-            };
-            todos.Add(todo1);
-
-            return todos;
+            var todos = _todoServices.AllTodos();
+            if(id is null) return Ok(todos);
+            var MyTodos = todos.Where(t => t.Id == id);
+            return Ok(MyTodos);
         }
+    
     }
     
 }
