@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TaskAPI.Dataaccess;
 using TaskAPI.Models;
 
-namespace TaskAPI.Services
+namespace TaskAPI.Services.Todos
 {
     public class TodoSqlServerService : ItodoRepository
     {
