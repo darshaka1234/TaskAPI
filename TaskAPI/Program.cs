@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ItodoRepository, TodoServices>();    
+builder.Services.AddScoped<ItodoRepository, TodoSqlServerService>();    
 
 var app = builder.Build();
 
